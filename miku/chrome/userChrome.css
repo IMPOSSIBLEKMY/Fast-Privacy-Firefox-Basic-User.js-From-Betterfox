@@ -1,0 +1,80 @@
+/* =========================================================
+Completely hide vertical tabs on left and hover at the left zone to open
+NOTES: Do not turn on the option "Expand sidebar on hover"
+       Turn on the option "Move sidebar to the right" to make "Bookmarks", "History", "Customize sidebar" sidebar menu appear on the right. This feels more natural.
+========================================================= */
+
+:root {
+  --uc-sidebar-hoverzone: 10px;
+  --uc-sidebar-width: 200px;
+  --uc-nav-height: 32px;
+}
+
+#navigator-toolbox {
+  position: relative;
+  z-index: 999;
+}
+
+#sidebar-launcher-splitter {
+  display: none;
+}
+
+/* Apply autohide always (no transition) */
+#sidebar-main {
+  position: fixed !important;
+  top: var(--uc-nav-height) !important;
+  bottom: 0 !important;
+  left: 0 !important;
+  width: var(--uc-sidebar-width) !important;
+  max-width: var(--uc-sidebar-width) !important;
+  z-index: 9999 !important;
+  background-color: var(--lwt-accent-color) !important;
+  box-shadow: 2px 0 12px rgba(0, 0, 0, 0.2) !important;
+
+  /* Invisible trigger strip on the exposed right edge */
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: var(--uc-sidebar-hoverzone);
+    height: 100%;
+    background: transparent;
+    pointer-events: auto;
+    z-index: 10000;
+  }
+
+  /* Hidden state – slide left, trigger zone stays invisible */
+  &:not(:hover, :focus-within) {
+    transform: translateX(calc(-100% + var(--uc-sidebar-hoverzone))) !important;
+    opacity: 0 !important;
+  }
+
+  /* Visible state */
+  &:is(:hover, :focus-within) {
+    transform: translateX(0) !important;
+    opacity: 1 !important;
+  }
+}
+
+/* =========================================================
+Colorize your right click menu
+
+context menu background color
+context menu border color (sync border color with background - no ugly border)
+text color
+hovered item color - last line targets the elements submenus
+========================================================= */
+
+menupopup {
+  --panel-background: var(--arrowpanel-background) !important;
+  --panel-border-color: var(--arrowpanel-border-color) !important;
+  --panel-color: var(--arrowpanel-color) !important;
+}
+
+menuitem:hover,
+menu:where([_moz-menuactive="true"]:not([disabled="true"])),
+menuitem:where([_moz-menuactive="true"]:not([disabled="true"])) {
+  background-color: color-mix(in srgb, var(--arrowpanel-color, white) 20%, transparent) !important;
+  color: var(--arrowpanel-color, white) !important;
+}

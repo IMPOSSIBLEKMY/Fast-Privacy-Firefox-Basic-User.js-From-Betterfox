@@ -1,0 +1,16 @@
+/* ========== SCROLLBAR MINIMIZATION (global) ========== */
+/* Makes scrollbars thinner on every web page */
+* {
+  scrollbar-width: thin;          /* Firefox's built‑in thin scrollbar */
+}
+
+/* ========== NEW TAB BACKGROUND ========== */
+@-moz-document url("about:newtab"), url("about:home"), url("about:blank") {
+  body {
+    background-image: url("miku.jpg") !important;
+    background-size: cover !important;
+    background-position: center !important;
+    background-repeat: no-repeat !important;
+    background-attachment: fixed !important;
+  }
+}
