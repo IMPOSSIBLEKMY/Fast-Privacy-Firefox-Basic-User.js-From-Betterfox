@@ -5,7 +5,7 @@
 }
 
 /* ========== NEW TAB BACKGROUND ========== */
-@-moz-document url("about:newtab"), url("about:home"), url("about:blank") {
+@-moz-document url("about:newtab"), url("about:home") {
   body {
     background-image: url("miku.jpg") !important;
     background-size: cover !important;
